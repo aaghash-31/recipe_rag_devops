@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Database
+*.db
+
+# Vector DB
+backend/vectorstore/
+
+# Raw datasets
+data/raw/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Zip files
+*.zip
