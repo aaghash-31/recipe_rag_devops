@@ -31,6 +31,10 @@ spec:
             secretKeyRef:
               name: groq-secret
               key: GROQ_API_KEY
+        
+        volumeMounts:
+        - mountPath: /app/vectorstore
+          name: vectorstore-storage
 
 ---
 apiVersion: v1
@@ -49,3 +53,8 @@ spec:
       targetPort: 8000
 
   type: ClusterIP
+  
+volumes:
+  - name: vectorstore-storage
+    persistentVolumeClaim:
+      claimName: vectorstore-pvc
