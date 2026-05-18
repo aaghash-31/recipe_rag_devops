@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: jenkins
+  namespace: jenkins
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: jenkins
+
+  template:
+    metadata:
+      labels:
+        app: jenkins
+
+    spec:
+      containers:
+      - name: jenkins
+
+        image: jenkins/jenkins:lts
+
+        ports:
+        - containerPort: 8080
+
+        - containerPort: 50000
+
+        volumeMounts:
+        - name: jenkins-storage
+          mountPath: /var/jenkins_home
+
+      volumes:
+      - name: jenkins-storage
+        persistentVolumeClaim:
+          claimName: jenkins-pvc
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: jenkins-service
+  namespace: jenkins
+
+spec:
+  selector:
+    app: jenkins
+
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 32000
+
+  type: NodePort
