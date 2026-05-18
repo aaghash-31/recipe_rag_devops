@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: recipe-backend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: recipe-backend
+
+  template:
+    metadata:
+      labels:
+        app: recipe-backend
+
+    spec:
+      containers:
+      - name: backend
+
+        image: aaghash/recipe-backend:v1
+
+        ports:
+        - containerPort: 8000
+
+        env:
+        - name: GROQ_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: groq-secret
+              key: GROQ_API_KEY
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: backend-service
+
+spec:
+  selector:
+    app: recipe-backend
+
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+
+  type: ClusterIP
