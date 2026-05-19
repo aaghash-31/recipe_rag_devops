@@ -1,7 +1,7 @@
 import logging
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from backend.rag.rag_service import RagService
+from rag.rag_service import RagService
 import uvicorn
 
 # Setup logging
