@@ -18,6 +18,8 @@ spec:
         app: jenkins
 
     spec:
+      serviceAccountName: jenkins
+
       containers:
       - name: jenkins
 
