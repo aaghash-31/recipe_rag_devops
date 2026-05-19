@@ -1,0 +1,35 @@
+services:
+
+  backend:
+    image: aaghash/recipe-backend:v1
+    container_name: recipe-backend
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./backend/vectorstore:/app/vectorstore
+      - huggingface_cache:/root/.cache/huggingface
+
+    restart: always
+
+  frontend:
+    image: aaghash/recipe-frontend:v1
+    container_name: recipe-frontend
+
+    ports:
+      - "8501:8501"
+
+    depends_on:
+      - backend
+
+    environment:
+      BACKEND_URL: http://backend:8000
+
+    restart: always
+
+volumes:
+  huggingface_cache:
