@@ -53,7 +53,11 @@ class RagService:
         logger.info("Initializing embedding model...")
         embedding_model = HuggingFaceEmbeddings(
             model_name=self.embedding_model_name,
-            model_kwargs={"device": "cpu", "trust_remote_code": True},
+            model_kwargs={
+                "device": "cpu",
+                "trust_remote_code": True
+            },
+            cache_folder="/app/hf_cache"
         )
 
         logger.info("Loading FAISS index...")
