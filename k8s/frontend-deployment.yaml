@@ -20,7 +20,7 @@ spec:
       containers:
       - name: frontend
 
-        image: aaghash/recipe-frontend:v1
+        image: aaghash/recipe-frontend:v2
 
         imagePullPolicy: Always
         
