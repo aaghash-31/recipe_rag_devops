@@ -55,7 +55,8 @@ class RagService:
             model_name=self.embedding_model_name,
             model_kwargs={
                 "device": "cpu",
-                "trust_remote_code": True
+                "trust_remote_code": True,
+                "local_files_only": True
             },
             cache_folder="/app/hf_cache"
         )
