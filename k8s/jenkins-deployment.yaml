@@ -23,14 +23,28 @@ spec:
 
         image: jenkins/jenkins:lts
 
+        securityContext:
+          privileged: true
+
         ports:
         - containerPort: 8080
 
         - containerPort: 50000
 
+        command:
+        - /bin/bash
+        - -c
+        - |
+          apt update && \
+          apt install -y docker.io curl && \
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+          install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
+          /usr/local/bin/jenkins.sh
+
         volumeMounts:
         - name: jenkins-storage
           mountPath: /var/jenkins_home
+
         - name: docker-sock
           mountPath: /var/run/docker.sock
 
@@ -38,9 +52,11 @@ spec:
       - name: jenkins-storage
         persistentVolumeClaim:
           claimName: jenkins-pvc
+
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock
+
 ---
 apiVersion: v1
 kind: Service
