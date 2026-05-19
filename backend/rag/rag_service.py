@@ -34,7 +34,7 @@ Answer:"""
 class RagService:
     def __init__(
         self,
-        index_path: str = "/app/backend/vectorstore/index_5k",
+        index_path: str = "vectorstore/index_5k",
         embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
         llm_model: str = "llama-3.1-8b-instant",
         temperature: float = 0.3,
