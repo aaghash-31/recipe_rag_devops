@@ -1,5 +1,24 @@
 fastapi
-langchain
-faiss
-embeddings
 uvicorn
+python-dotenv
+
+langchain
+langchain-core
+langchain-community
+langchain-groq
+langchain-huggingface
+
+sentence-transformers
+faiss-cpu
+
+pydantic
+tqdm
+requests
+
+torch==2.2.2+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+transformers==4.41.2
+
+numpy
+pandas
