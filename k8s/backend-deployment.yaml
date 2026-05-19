@@ -21,7 +21,7 @@ spec:
       containers:
       - name: backend
 
-        image: aaghash/recipe-backend:v2
+        image: aaghash/recipe-backend:v1
         
         imagePullPolicy: Always
 
